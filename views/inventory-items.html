@@ -23,9 +23,45 @@
 		<main>
 			<section>
 				<h1>Inventory Items</h1>
+				<table>
+					<thead>
+						<tr>
+							<th>itemID</th>
+							<th>roomID</th>
+							<th>name</th>
+							<th>itemCondition</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- To be deleted once DB data can be loaded -->
+						<tr>
+							<td>7</td>
+							<td>6</td>
+							<td>Skeleton</td>
+							<td>Excellent condition. Provenance unknown.</td>
+							<td><button class="table-button">Edit</button></td>
+							<td><button class="table-button delete">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 			<section>
 				<h1>Add Inventory Item</h1>
+				<form method="">
+					<div class="form-field">
+						<label for="" class="form-label">Inventory Item Name</label>
+						<input type="text" name="" placeholder="" />
+					</div>
+					<div class="form-field">
+						<label for="" class="form-label">Item Condition</label>
+						<input type="text" name="" placeholder="" />
+					</div>
+					<div class="button-row">
+						<input type="submit" value="Add Inventory Item" />
+					</div>
+				</form>
 			</section>
 		</main>
 		<footer></footer>

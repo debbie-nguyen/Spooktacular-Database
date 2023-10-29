@@ -23,9 +23,55 @@
 		<main>
 			<section>
 				<h1>Rooms</h1>
+				<table>
+					<thead>
+						<tr>
+							<th>roomID</th>
+							<th>name</th>
+							<th>theme</th>
+							<th>maxCapacity</th>
+							<th>level</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- To be deleted once DB data can be loaded -->
+						<tr>
+							<td>6</td>
+							<td>Bourdoir of Bones</td>
+							<td>Spooky skeletons</td>
+							<td>60</td>
+							<td>4</td>
+							<td><button class="table-button">Edit</button></td>
+							<td><button class="table-button delete">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 			<section>
 				<h1>Add Room</h1>
+				<form method="">
+					<div class="form-field">
+						<label for="" class="form-label">Name</label>
+						<input type="text" name="" placeholder="" />
+					</div>
+					<div class="form-field">
+						<label for="" class="form-label">Theme</label>
+						<input type="text" name="" placeholder="" />
+					</div>
+					<div class="form-field">
+						<label for="" class="form-label">Max Capacity</label>
+						<input type="text" name="" placeholder="" />
+					</div>
+					<div class="form-field">
+						<label for="" class="form-label">Level</label>
+						<input type="text" name="" placeholder="" />
+					</div>
+					<div class="button-row">
+						<input type="submit" value="Add Customer" />
+					</div>
+				</form>
 			</section>
 		</main>
 		<footer></footer>
