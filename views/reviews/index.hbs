@@ -1,0 +1,60 @@
+{{> navigation currentView="reviews" }}
+
+<main>
+	<section>
+		<header class="header-row">
+			<h1>Reviews</h1>
+			<button onClick="goToAddForm()" type="button">Add New <i class="fa fa-plus"></i></button>
+		</header>
+
+		{{#if successMessage}}
+		{{> notification centered="true" type="success" message=successMessage}}
+		{{/if}}
+
+		{{#if errorMessage}}
+		{{> notification centered="true" message=errorMessage}}
+		{{/if}}
+
+		<p>Ordered by: Most recently created</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Creation Date</th>
+					<th>ID</th>
+					<th>Customer</th>
+					<th>Room</th>
+					<th>Rating</th>
+					<th class="col-long-text">Text</th>
+					<th class="col-table-button"></th>
+					<th class="col-table-button"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each reviews}}
+				<tr {{#ifCond ../highlight "==" this.reviewID}}class="highlight"{{/ifCond}}>
+					<td>{{ this.creationDate }}</td>
+					<td>{{ this.reviewID }}</td>
+					<td>{{ this.customerFullName }}</td>
+					<td>{{ this.roomName }}</td>
+					<td>{{ this.rating }}</td>
+					<td>{{ this.text }}</td>
+					<td>
+						<button onClick="goToEditForm({{ this.reviewID }})" class="table-button edit" type="button">
+							<i class="fa fa-pen-to-square"></i>
+						</button>
+					</td>
+					<td>
+						<form method="DELETE" action="/reviews/delete/{{ this.reviewID }}" class="form-delete">
+							<input type="submit" class="table-button delete" value="" />
+							<span class="icon-delete"><i class="fa fa-trash-can"></i></span>
+						</form>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</section>
+</main>
+
+<script type="text/javascript" src="/js/reviews.js"></script>

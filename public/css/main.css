@@ -1,0 +1,495 @@
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1em;
+	font-family: "Euclid Circular B", sans-serif;
+	background: #181a1b;
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/*-----------------------------
+Typography/Links/Bullet Points
+------------------------------*/
+h1 {
+	color: #de6603;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+h2 {
+	color: #ffc08d;
+	font-size: 1.1em;
+	font-weight: normal;
+}
+
+p {
+	color: #a4b7a4;
+}
+
+a {
+	color: #a4b7a4;
+	text-decoration: none;
+}
+
+a:active,
+a:focus,
+a:hover {
+	color: #186a3e;
+}
+
+ul {
+	list-style: none;
+}
+
+h1,
+h2,
+p,
+li,
+label,
+th,
+td,
+.radio-wrapper {
+	user-select: none;
+	cursor: default;
+}
+
+/*-----------------
+Nav items, buttons 
+-------------------*/
+button,
+a.nav-item,
+input[type="submit"] {
+	padding: 1em;
+	font-size: 0.9rem;
+	font-weight: bold;
+	letter-spacing: 2px;
+	color: #181a1b;
+	background-color: #02af54;
+	border: none;
+	border-radius: 5px;
+	text-transform: uppercase;
+	transition: all ease 0.3s;
+	cursor: pointer;
+}
+
+button,
+input[type="submit"] {
+	min-width: 96px;
+	margin: 1em 0;
+}
+
+a.nav-item {
+	margin: 1em;
+}
+
+button:hover,
+a.nav-item:hover,
+input[type="submit"]:hover {
+	background-color: #1ce479;
+}
+
+a.nav-item.selected {
+	color: #ffffff;
+	background-color: #046b34;
+}
+
+button.button-secondary {
+	background-color: transparent;
+	color: #eeeeee;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+button.button-secondary:hover {
+	background-color: rgba(255, 255, 255, 0.08);
+}
+
+button:disabled,
+input[type="submit"]:disabled {
+	color: #616161;
+	background-color: #272727;
+	border: none;
+	cursor: default;
+}
+
+/*-----------------
+Layout
+-------------------*/
+nav {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+main {
+	margin: 0 auto;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 1;
+}
+
+.action-button-wrapper {
+	width: 100%;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filter-wrapper {
+	padding: 0.5em 0;
+	display: flex;
+	align-items: center;
+}
+
+.filter-wrapper label {
+	font-size: 0.75em;
+	text-transform: uppercase;
+	margin-right: 1em;
+}
+
+.filter-wrapper select {
+	min-width: 200px;
+}
+
+section {
+	min-width: 50em;
+	margin-bottom: 1.75em;
+	padding: 1em 1.5em;
+	background-color: rgba(255, 255, 255, 0.02);
+	border-radius: 5px;
+}
+
+.intro h1,
+.intro p {
+	text-align: center;
+}
+
+/*-----------------
+Tables
+-------------------*/
+table {
+	width: 100%;
+	text-align: left;
+	margin: 1.5em 0;
+	border: none;
+	outline: none;
+	border-collapse: collapse;
+}
+
+thead {
+	background-color: #212121;
+	border-bottom: 2px solid #333333;
+}
+
+th,
+td {
+	padding: 0.5em 0.75em;
+	line-height: 1.25em;
+}
+
+/* Column widths */
+th.col-long-text {
+	width: 400px;
+}
+th.col-table-button {
+	width: 120px;
+}
+
+/* Alternating table row colors */
+tbody tr {
+	background-color: rgba(255, 255, 255, 0.08);
+}
+
+tbody tr:nth-child(odd) {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Highlight table row: little bar on the left */
+tbody tr.highlight {
+	position: relative;
+}
+
+tbody tr.highlight:after {
+	content: "";
+	width: 5px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #1ce479;
+}
+
+button.table-button,
+input[type="submit"].table-button {
+	width: 100%;
+	height: 38px;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0px;
+	text-align: center;
+	display: flex;
+	cursor: pointer;
+}
+
+button.table-button i {
+	font-size: 1.3em;
+	margin: auto;
+}
+
+button.table-button.delete,
+input[type="submit"].table-button.delete {
+	background-color: #c04f42;
+	position: relative;
+}
+
+button.table-button.delete:hover,
+input[type="submit"].table-button.delete:hover {
+	background-color: salmon;
+}
+
+button.table-button:disabled {
+	cursor: default;
+}
+
+button.table-button.delete:disabled {
+	background-color: #473837;
+}
+
+button.table-button.delete:disabled i {
+	opacity: 0.75;
+}
+
+/*Tooltip for rows that cannot be deleted*/
+.nodelete-tooltip {
+	width: 140px;
+	height: 38px;
+	padding: 4px;
+	border: 1px solid #424242;
+	border-radius: 6px;
+	background: #1f1f1f;
+	position: absolute;
+	top: 0;
+	left: 100px;
+	z-index: 2;
+	display: none;
+}
+
+.nodelete-tooltip p {
+	margin: auto;
+	padding: 0;
+	color: white;
+	font-size: 11px;
+	font-weight: normal;
+	text-transform: initial;
+}
+
+button.table-button.delete:disabled:hover .nodelete-tooltip {
+	display: flex;
+}
+
+.form-delete {
+	position: relative;
+}
+
+.icon-delete {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 10px;
+	left: calc((100% - 16px) / 2);
+	cursor: pointer;
+	pointer-events: none;
+	margin: auto;
+}
+
+.icon-delete i {
+	color: #181a1b;
+	font-size: 1.25em;
+}
+
+/*-------------------
+Form Elements
+---------------------*/
+table form {
+	margin: 0;
+}
+
+.form-field {
+	padding: 0.5em 0;
+	display: flex;
+	align-items: center;
+}
+
+.form-field.stacked {
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.form-field.columns {
+	align-items: flex-start;
+}
+
+.form-field.columns .column-label {
+	width: 160px;
+}
+
+.form-field.columns .column-input {
+	flex: 1;
+}
+
+.form-label {
+	min-width: 160px;
+}
+
+.form-field-explanation {
+	margin: 0.5em 0;
+	font-size: 0.75em;
+	color: #616161;
+}
+
+label .form-field-explanation {
+	margin: 0 0 0 0.75em;
+}
+
+label.disabled,
+.form-label.disabled {
+	opacity: 0.2;
+}
+
+.form-field.stacked .form-label {
+	min-width: 0;
+	margin-bottom: 0.75em;
+}
+
+.form-field select,
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field textarea {
+	width: 100%;
+}
+
+select,
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea {
+	font-family: "Euclid Circular B", sans-serif;
+	font-size: 16px;
+	color: #ffffff;
+	padding: 0.5em 0.75em;
+	border: 1px solid #333333;
+	border-radius: 3px;
+	outline: none;
+	background-color: #212121;
+	caret-color: white;
+}
+
+select:disabled,
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="date"]:disabled,
+textarea:disabled {
+	color: #616161;
+	border: none;
+	background-color: #131313;
+}
+
+/*Fix Chrome autofill default white background*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: white;
+	transition: background-color 5000s ease-in-out 0s;
+}
+
+.radio-wrapper {
+	margin-right: 2em;
+	margin-bottom: 0.5em;
+	display: flex;
+	align-items: center;
+}
+
+input[type="radio"] {
+	width: 18px;
+	height: 18px;
+	margin: 0 0.75em 0 0;
+}
+
+.button-row {
+	width: 100%;
+	margin-top: 1.5em;
+	padding: 0.75em 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+input[type="submit"] {
+	letter-spacing: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+/*-----------------
+Notification
+-------------------*/
+.notification {
+	border-radius: 5px;
+	padding: 0.5em 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+}
+
+.notification.centered {
+	max-width: 600px;
+	margin: 1.5em auto;
+}
+
+.button-row .notification {
+	flex: 1;
+	margin-right: 1.5em;
+}
+
+.notification.error {
+	border: 1px solid #c04f42;
+	color: salmon;
+}
+
+.notification.success {
+	border: 1px solid #02af54;
+	color: #02af54;
+}
+
+.notification i {
+	font-size: 1.3em;
+	margin-right: 0.75em;
+}
+
+/*-----------------
+Helpers
+-------------------*/
+.display-none {
+	display: none !important;
+}

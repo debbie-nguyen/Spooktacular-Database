@@ -1,0 +1,73 @@
+{{!-- Citations: 
+-   Title: Checking Handlebars documentation to figure out how it works, from layouts to partials to built-in helpers such as 'if' and 'each'.
+-   Date Accessed: 30 Oct 2023
+-   Adapted from: https://handlebarsjs.com/guide/
+-   Degree of originality: Largely applying the Handlebars logic the same way as the documentation. Nothing too adventurous.
+-   Author: Yehuda Katz 
+--}}
+
+{{> navigation currentView="customers" }}
+
+<main>
+	<section>
+		<header class="header-row">
+			<h1>Customers</h1>
+			<button onClick="goToAddForm()" type="button">Add New <i class="fa fa-plus"></i></button>
+		</header>
+
+		{{#if successMessage}}
+		{{> notification centered="true" type="success" message=successMessage}}
+		{{/if}}
+
+		{{#if errorMessage}}
+		{{> notification centered="true" message=errorMessage}}
+		{{/if}}
+
+		<p>Ordered by: Most recently added</p>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th class="col-table-button"></th>
+					<th class="col-table-button"></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+			<tbody>
+				{{#each customers}}
+				<tr {{#ifCond ../highlight "==" this.customerID}}class="highlight"{{/ifCond}}>
+					<td>{{ this.customerID }}</td>
+					<td>{{ this.firstName }}</td>
+					<td>{{ this.lastName }}</td>
+					<td>{{ this.email }}</td>
+					<td>
+						<button onClick="goToEditForm({{ this.customerID }})" class="table-button edit" type="button">
+							<i class="fa fa-pen-to-square"></i>
+						</button>
+					</td>
+					<td>
+						{{#ifCond this.hasChildRows "==" "0"}}
+						<form method="DELETE" action="/customers/delete/{{ this.customerID }}" class="form-delete">
+							<input type="submit" class="table-button delete" value="" />
+							<span class="icon-delete"><i class="fa fa-trash-can"></i></span>
+						</form>
+						{{else}}
+						<button class="table-button delete" disabled>
+							<span class="icon-delete"><i class="fa fa-trash-can"></i></span>
+							<div class="nodelete-tooltip">
+								<p>Unable to delete. Owns Ticket or Review.</p>
+							</div>
+						</button>
+						{{/ifCond}}
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</section>
+</main>
+
+<script type="text/javascript" src="/js/customers.js"></script>

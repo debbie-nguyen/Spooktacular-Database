@@ -1,0 +1,56 @@
+{{> navigation currentView="tickets" }}
+
+<main>
+	<section>
+		<header class="header-row">
+			<h1>Tickets</h1>
+			<button onClick="goToAddForm()" type="button">Add New <i class="fa fa-plus"></i></button>
+		</header>
+
+		{{#if successMessage}}
+		{{> notification centered="true" type="success" message=successMessage}}
+		{{/if}}
+
+		{{#if errorMessage}}
+		{{> notification centered="true" message=errorMessage}}
+		{{/if}}
+
+		<p>Ordered by: Most recently purchased</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Purchase Date</th>
+					<th>ID</th>
+					<th>Customer</th>
+					<th>Quantity</th>
+					<th>Ticket Type</th>
+					<th>Unit Price</th>
+					<th>Total Price</th>
+					<th class="col-table-button"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each tickets}}
+				<tr {{#ifCond ../highlight "==" this.ticketID}}class="highlight"{{/ifCond}}>
+					<td>{{ this.purchaseDate }}</td>
+					<td>{{ this.ticketID }}</td>
+					<td>{{ this.customerFullName }}</td>
+					<td>{{ this.quantity }}</td>
+					<td>{{ this.ticketType }}</td>
+					<td>${{ this.unitPrice }}</td>
+					<td>${{ this.totalPrice }}</td>
+					<td>
+						<form method="DELETE" action="/tickets/delete/{{ this.ticketID }}" class="form-delete">
+							<input type="submit" class="table-button delete" value="" />
+							<span class="icon-delete"><i class="fa fa-trash-can"></i></span>
+						</form>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</section>
+</main>
+
+<script type="text/javascript" src="/js/tickets.js"></script>

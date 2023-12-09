@@ -25,11 +25,11 @@ CREATE TABLE IF NOT EXISTS Customers (
 CREATE TABLE IF NOT EXISTS AdmissionPrices (
     priceID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     year int NOT NULL,
+    description varchar(64) NOT NULL,
     basePrice decimal(9,2) NOT NULL
 ) ENGINE = InnoDB;
 
 -- Create Tickets table
--- dateFirstEntry defaults to epoch time
 -- M:1 mandatory relationship with Customers
 -- M:1 mandatory relationship with AdmissionPrices
 CREATE TABLE IF NOT EXISTS Tickets (
@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS Tickets (
     priceID int NOT NULL,
     quantity int NOT NULL DEFAULT 1,
     purchaseDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    entryDate datetime DEFAULT '1970-01-01 07:30:00',
     FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE RESTRICT,
     FOREIGN KEY (priceID) REFERENCES AdmissionPrices(priceID) ON DELETE RESTRICT
 ) ENGINE = InnoDB;
@@ -94,12 +93,13 @@ CREATE TABLE IF NOT EXISTS Reviews (
 ) ENGINE = InnoDB;
 
 /*------------------------------
-    Create intersection tables 
+    Create intersection table
 ------------------------------*/
 CREATE TABLE IF NOT EXISTS InventoryItems_Employees (
+    relationshipID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     itemID int,
     employeeID int,
-    PRIMARY KEY (itemID, employeeID),
+    UNIQUE (itemID, employeeID),
     FOREIGN KEY (itemID) REFERENCES InventoryItems(itemID) ON DELETE CASCADE,
     FOREIGN KEY (employeeID) REFERENCES Employees(employeeID) ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -127,12 +127,19 @@ INSERT INTO Customers (firstName, lastName, email) VALUES
         "Donnie",
         "Darko",
         "donnyd@email.com"
+    ),
+    (
+        "Lily",
+        "Lycanthrope",
+        "lilyl@email.com"
     );
 
-INSERT INTO AdmissionPrices (year, basePrice) VALUES
-    (2021, 15.00),
-    (2022, 20.00),
-    (2023, 25.00);
+INSERT INTO AdmissionPrices (year, description, basePrice) VALUES
+    (2021, "Standard", 15.00),
+    (2022, "Standard", 20.00),
+    (2023, "Student", 10.00),
+    (2023, "Standard", 25.00),
+    (2023, "Senior", 18.00);
 
 INSERT INTO Rooms (name, theme, maxCapacity, level) VALUES 
     (
@@ -172,20 +179,20 @@ INSERT INTO Rooms (name, theme, maxCapacity, level) VALUES
         4
     );
 
--- NOTE: Usually we would let the DB automatically fill 'purchaseDate' and 'entryDate' with default values, but here, we want to seed data from past years.
-INSERT INTO Tickets (customerID, priceID, quantity, purchaseDate, entryDate) VALUES
-    (1, 1, 2, "2021-10-05 11:32:12", "2021-10-17 07:44:01"),
-    (2, 2, 1, "2022-09-22 15:21:03", "2022-10-08 18:48:14"),
-    (3, 2, 3, "2022-09-28 09:40:10", "2022-10-12 17:58:21"),
-    (4, 3, 1, "2023-10-01 18:33:10", "2023-10-01 18:36:02"),
-    (1, 3, 1, "2023-09-25 23:15:40", "2023-10-01 20:30:05");
+-- NOTE: Usually we would let the DB automatically fill 'purchaseDate' with a default value, but here, we want to seed data from past years.
+INSERT INTO Tickets (customerID, priceID, quantity, purchaseDate) VALUES
+    (1, 1, 2, "2021-10-05 11:32:12"),
+    (2, 2, 1, "2022-09-22 15:21:03"),
+    (3, 2, 3, "2022-09-28 09:40:10"),
+    (4, 3, 1, "2023-10-01 18:33:10"),
+    (1, 3, 1, "2023-09-25 23:15:40");
 
 INSERT INTO Employees (firstName, lastName, email, jobTitle, startDate, endDate, salary) VALUES 
     (
         "Vincent",
         "Vampire",
         "vincentv@email.com",
-        "Count von Canapes",
+        "Charismatic Count",
         "2022-09-15 12:00:00",
         "2022-11-05 12:00:00",
         60000
@@ -203,7 +210,7 @@ INSERT INTO Employees (firstName, lastName, email, jobTitle, startDate, endDate,
         "Greta",
         "Gravestone",
         "gretag@email.com",
-        "Lady Carnelian",
+        "Zany Zombie",
         "2022-09-15 12:00:00",
         "2022-11-05 12:00:00",
         60000
